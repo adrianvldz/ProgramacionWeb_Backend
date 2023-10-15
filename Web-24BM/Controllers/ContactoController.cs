@@ -51,7 +51,6 @@ namespace Web_24BM.Controllers
             }
             return View("Formulario", model);
 
-
         }
         public IActionResult Contacto()
         {
