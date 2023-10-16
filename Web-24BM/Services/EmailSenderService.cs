@@ -1,6 +1,7 @@
 ﻿using System.Net.Mail;
 using System.Net;
 using Web_24BM.Models;
+using Microsoft.Identity.Client;
 
 namespace Web_24BM.Services
 {
@@ -78,6 +79,37 @@ namespace Web_24BM.Services
             }
 
 
+            return result;
+        }
+
+        public bool SendEmailWithData(MensajeViewModel model)
+        {
+            bool result = false;
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                SmtpClient smtpClient = new SmtpClient("mail.shapp.mx", 587);
+
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential("moises.puc@shapp.mx", "Dhaserck_999");
+
+                mail.From = new MailAddress("moises.puc@shapp.mx", "Administrador");
+                mail.To.Add(model.Email);
+                mail.Subject = model.Subject;
+                mail.IsBodyHtml = true;
+                mail.Body = model.Content;
+
+                smtpClient.Send(mail);
+
+                result = true;
+
+            }
+            catch (Exception ex)
+            {
+
+            }
             return result;
         }
     }

@@ -1,0 +1,65 @@
+﻿@model Web_24BM.Models.Curriculum
+
+
+<div class="container mt-5">
+  
+    <div class="row">
+        @if (TempData["msj"] != null)
+        {
+            <div class="alert alert-danger">@TempData["msj"] </div>
+        }
+        <div class="col-12">
+            <h3 class="text-center">Formulario de Curriculum</h3>
+            <p class="text-center">Ingresa los datos de tu experiencia laboral</p>
+        </div>
+        <div class="col-8">
+            <form asp-action="EnviarFormulario" method="post">
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Nombre</label>
+                    <input type="text" asp-for="Nombre" class="form-control" id="exampleFormControlInput1" placeholder="Tu Nombre">
+                    <span asp-validation-for="Nombre" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Apellido</label>
+                    <input type="text" asp-for="Apellido" class="form-control" id="exampleFormControlInput1" placeholder="Tus Apellidos">
+                    <span asp-validation-for="Apellido" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Email address</label>
+                    <input type="email" asp-for="Email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" asp-for="FechaNacimiento" class="form-control" id="exampleFormControlInput1" >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Direccion</label>
+                    <input type="text" asp-for="Direccion" class="form-control" id="exampleFormControlInput1" placeholder="Tu direccion">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Foto</label>
+                    <input type="file" asp-for="Email" class="form-control" id="exampleFormControlInput1" >
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Objetivos</label>
+                    <textarea class="form-control" asp-for="Objetivo" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+
+                    <input type="submit" class="btn btn-primary" value="Enviar">
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+            <h3>Solicita información</h3>
+            <p>Enviaremos tu comentario y responderemos en breve...</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+

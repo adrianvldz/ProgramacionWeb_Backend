@@ -7,5 +7,7 @@ namespace Web_24BM.Services
         bool SendEmail(string email);
 
         bool ProcesarSolicitud(EmailViewModel email);
+
+        bool SendEmailWithData(MensajeViewModel model);
     }
 }
