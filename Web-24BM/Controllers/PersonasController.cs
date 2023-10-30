@@ -5,7 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using Web_24BM.Data;
+using Repository.Context;
+
 using Web_24BM.Models;
 
 namespace Web_24BM.Controllers

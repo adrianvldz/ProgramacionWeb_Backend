@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Web_24BM.Data;
+using Repository.Context;
 using Web_24BM.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +15,10 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IEmailSenderServices, EmailSenderService>();
+
+
 builder.Services.AddSession();
+builder.Services.AddTransient<ICurriculum, CurriculumService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

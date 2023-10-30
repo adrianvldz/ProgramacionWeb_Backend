@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Web_24BM.Models.Curriculum>
+
+<h1 class="text-center">Lista de currículums</h1>
+
+<div class="row">
+	@if (TempData["MenssageSuccess"] != null)
+	{
+		<div class="alert alert-success">@TempData["MenssageSuccess"]</div>
+	}
+	else if (TempData["ErrorMessage"] != null)
+	{
+		<div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+	}
+
+	<div class="col-12">
+		<a class="btn btn-success mb-3 me-auto" asp-action="Create" asp-controller="Curri">Nuevo curriculum</a>
+	</div>
+	<div class="col-12">
+		@if (Model.Any())
+		{
+			 <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Correo</th>
+                <th>Fecha de nacimiento</th>
+                <th>Dirección</th>
+                
+                <th>Objetivos</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+
+                            <td>@item.Id</td>
+                        <td>@item.Nombre</td>
+                        <td>@item.Apellidos</td>
+                        <td>@item.Email</td>
+                        <td>@item.FechaNacimiento</td>
+                        <td>@item.Direccion</td>
+                           <td>@item.Objetivo</td>
+                        <td><img src="" alt="Foto"></td>
+                        <td>Ser Senior</td>
+                        <td>
+                            <a class="btn btn-primary" asp-controller="Curri" asp-route-idCurriculum="@item.Id" asp-action="Edit">Editar</a>
+                        </td>
+                        <td>
+                            <form asp-action="Delete" method="post">
+											<input type="hidden" name="idCurriculum" value="@item.Id">
+											<button type="submit" class="btn btn-danger">Eliminar</button>
+							</form>
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+			
+		}
+	</div>
+</div> 

@@ -13,13 +13,13 @@ namespace Web_24BM.Controllers
         [HttpPost]
         public IActionResult EnviarFormulario(Curriculum model)
         {
-            string mensaje;
+            string mensaje ="";
             if(ModelState.IsValid)
             {
                 mensaje = "Datos Válidos";
 
                 TempData["msj"] = mensaje;
-                return RedirectToAction("Index");
+                return View("Curriculum");
             }
             else
             {
@@ -30,5 +30,13 @@ namespace Web_24BM.Controllers
             }
             
         }
+
+        [Route("Editar")]
+        public IActionResult Editar()
+        {
+            return View("Editar");
+        }
+
+        
     }
 }
