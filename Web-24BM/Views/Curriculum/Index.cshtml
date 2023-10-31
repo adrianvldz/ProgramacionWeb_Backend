@@ -13,7 +13,7 @@
 	}
 
 	<div class="col-12">
-		<a class="btn btn-success mb-3 me-auto" asp-action="Create" asp-controller="Curri">Nuevo curriculum</a>
+		<a class="btn btn-success mb-3 me-auto" asp-action="Create" asp-controller="Curriculum">Nuevo curriculum</a>
 	</div>
 	<div class="col-12">
 		@if (Model.Any())
@@ -46,10 +46,9 @@
                         <td>@item.FechaNacimiento</td>
                         <td>@item.Direccion</td>
                            <td>@item.Objetivo</td>
-                        <td><img src="" alt="Foto"></td>
-                        <td>Ser Senior</td>
+                       
                         <td>
-                            <a class="btn btn-primary" asp-controller="Curri" asp-route-idCurriculum="@item.Id" asp-action="Edit">Editar</a>
+                            <a class="btn btn-primary" asp-controller="Curriculum" asp-route-idCurriculum="@item.Id" asp-action="Edit">Editar</a>
                         </td>
                         <td>
                             <form asp-action="Delete" method="post">

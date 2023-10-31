@@ -4,11 +4,11 @@ using Web_24BM.Services;
 
 namespace Web_24BM.Controllers
 {
-    public class CurriController : Controller
+    public class CurriculumController : Controller
     {
         private readonly ICurriculum _curriculumService;
 
-        public CurriController(ICurriculum curriculumService)
+        public CurriculumController(ICurriculum curriculumService)
         {
             _curriculumService = curriculumService;
         }
@@ -30,7 +30,7 @@ namespace Web_24BM.Controllers
             if (response.Success)
             {
                 TempData["MenssageSuccess"] = response.Message;
-                return RedirectToAction("Index", "Curri");
+                return RedirectToAction("Index", "Curriculum");
             }
             else
             {
@@ -56,7 +56,7 @@ namespace Web_24BM.Controllers
             if (response.Success)
             {
                 TempData["MenssageSuccess"] = response.Message;
-                return RedirectToAction("Index", "Curri");
+                return RedirectToAction("Index", "Curriculum");
             }
             else
             {
@@ -74,13 +74,13 @@ namespace Web_24BM.Controllers
             if (response.Success)
             {
                 TempData["MenssageSuccess"] = response.Message;
-                return RedirectToAction("Index", "Curri");
+                return RedirectToAction("Index", "Curriculum");
             }
             else
             {
                 TempData["ErrorMessage"] = response.Message;
 
-                return RedirectToAction("Index", "Curri");
+                return RedirectToAction("Index", "Curriculum");
             }
         }
     }

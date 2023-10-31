@@ -12,7 +12,9 @@ namespace Web_24BM.Models
         [StringLength(50, ErrorMessage = "El campo nombre no debe superar los 50 caracteres")]
         public string Nombre { get; set; }
 
-        [StringLength(50, ErrorMessage = "El campo nombre no debe superar los 50 caracteres")]
+        [StringLength(50, ErrorMessage = "El campo Apellido no debe superar los 50 caracteres")]
+
+        [Required(ErrorMessage = "El campo Apellido es requerido")]
         public string Apellidos { get; set; }
 
         [DataType(DataType.EmailAddress)]
