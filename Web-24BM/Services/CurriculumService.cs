@@ -21,11 +21,25 @@ namespace Web_24BM.Services
             ResponseHelper response = new ResponseHelper();
             try
             {
+                string filePath = "";
+                string fileName = "";
+                if (model.Foto != null && model.Foto.Length > 0)
+                {
+                    fileName = Path.GetFileName(model.Foto.FileName);
+                    filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Archivos", fileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.Foto.CopyToAsync(fileStream);
+                    }
+
+                }
+                model.NombreFoto = fileName;
                 var result = await _Repository.Create(model);
                 if (result > 0)
                 {
                     response.Success = true;
-                    response.Message = $"Se agrego la evidencia {model.Nombre}";
+                    response.Message = $"Se agrego la evidencia '{model.Nombre}' correctamente";
                 }
             }
             catch (Exception e)
