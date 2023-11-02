@@ -34,6 +34,6 @@ namespace Web_24BM.Models
 
         [NotMapped]
         public IFormFile? Foto { get; set; }
-        public string NombreFoto { get; set; }
+        public string? NombreFoto { get; set; }
     }
 }

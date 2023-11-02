@@ -16,6 +16,14 @@ namespace Web_24BM.Controllers
         {
             return View(await _curriculumService.GetAll());
         }
+        [HttpGet]
+        public async Task<IActionResult> Details(int idCurriculum)
+        {
+            var curriculum = await _curriculumService.GetById(idCurriculum);
+
+            return View(curriculum);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -83,5 +91,7 @@ namespace Web_24BM.Controllers
                 return RedirectToAction("Index", "Curriculum");
             }
         }
+
+   
     }
 }

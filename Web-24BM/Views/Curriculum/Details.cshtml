@@ -1,0 +1,69 @@
+﻿@model Web_24BM.Models.Curriculum
+
+<h1 class="text-center m-5">Editar Curriculum</h1>
+
+<div class="container">
+    <a class="btn btn-success btn-lg fw-bold mb-4" asp-action="Index" asp-controller="Curriculum">Volver</a>
+
+    <form asp-action="Edit" asp-controller="Curriculum" method="post" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" value="@Model.Id" />
+
+        
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Información Personal</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <img src="~/Archivos/@Model.NombreFoto" class="rounded-circle" width="160" height="160" alt="Foto de perfil">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Nombre</label>
+                                <h2 class="card-title">@Model.Nombre</h2>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Apellidos</label>
+                                <h5 class="card-title">@Model.Apellidos</h5>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <h6 class="card-title">@Model.Email</h6>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Fecha de Nacimiento</label>
+                                <h6 class="card-title">@Model.FechaNacimiento</h6>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Direccion</label>
+                                <h6 class="card-title">@Model.Direccion</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Información Profesional</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Objetivo</label>
+                                <p class="card-text">@Model.Objetivo</p>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Datos laborales</label>
+                                <p class="card-text">@Model.DatosLaboral</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+       
+        <button type="submit" class="btn btn-success btn-lg mt-4 mb-4 fw-bold">Editar Curriculum</button>
+    </form>
+</div>
+
+
+

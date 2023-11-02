@@ -55,6 +55,20 @@ namespace Web_24BM.Services
 
             try
             {
+                // Obtén el curriculum del repositorio
+                Curriculum curriculum = await _Repository.GetById(IdCurriculum);
+
+                // Verifica si la foto existe
+                if (curriculum.NombreFoto != null)
+                {
+                    // Obtén la ruta de la foto
+                    string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Archivos", curriculum.NombreFoto);
+
+                    // Elimina la foto
+                    File.Delete(filePath);
+                }
+
+                // Elimina el curriculum del repositorio
                 if (await _Repository.Delete(IdCurriculum) > 0)
                 {
                     response.Success = true;
@@ -104,16 +118,47 @@ namespace Web_24BM.Services
 
             try
             {
-                if (await _Repository.Update(model) > 0)
+                string filePath = "";
+                string fileName = "";
+                // Verifica si el usuario está enviando una nueva foto
+                if (model.Foto != null && model.Foto.Length > 0)
                 {
-                    response.Success = true;
-                    response.Message = $"Se ha actualizado el dato {model.Nombre} con éxito.";
+                    // Obtén el nombre del archivo de la foto
+                    fileName = Path.GetFileName(model.Foto.FileName);
+
+                    // Obtén la ruta de la foto
+                    filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Archivos", fileName);
+
+                    // Elimina la foto existente
+                    File.Delete(filePath);
+
+                    // Sobrescribe la foto existente con la nueva foto
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await model.Foto.CopyToAsync(fileStream);
+                    }
+
+                    // Actualiza la foto en la base de datos
+                    model.NombreFoto = fileName;
+                    if (await _Repository.Update(model) > 0)
+                    {
+                        response.Success = true;
+                        response.Message = $"Se ha actualizado el Curriculum de '{model.Nombre}' con éxito.";
+                    }
+                }
+                else
+                {
+                    // Si no se envía una nueva foto, no hay nada que hacer
+                    if (await _Repository.Update(model) > 0)
+                    {
+                        response.Success = true;
+                        response.Message = $"Se ha actualizado el Curriculum de '{model.Nombre}' con éxito.";
+                    }
                 }
             }
             catch (Exception e)
             {
                 response.Message = e.Message;
-
             }
 
             return response;
