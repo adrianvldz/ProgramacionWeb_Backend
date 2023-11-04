@@ -1,5 +1,7 @@
 ﻿using Repository;
 using Repository.Context;
+using System.Text.RegularExpressions;
+using System.Web.Mvc;
 using Web_24BM.Models;
 
 
@@ -21,6 +23,28 @@ namespace Web_24BM.Services
             ResponseHelper response = new ResponseHelper();
             try
             {
+                string CURP = model.CURP;
+                string expresionRegularCURP = @"^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z\d]\d$";
+
+                if (!Regex.IsMatch(CURP, expresionRegularCURP))
+                {
+                    
+                    return response;
+                }
+
+                int edad = DateTime.Now.Year - model.FechaNacimiento.Year;
+
+                if (DateTime.Now.DayOfYear < model.FechaNacimiento.DayOfYear)
+                {
+                    edad--;
+                }
+
+                if(edad < 18)
+                {
+                    return response;
+                }
+
+              
                 string filePath = "";
                 string fileName = "";
                 if (model.Foto != null && model.Foto.Length > 0)
@@ -55,20 +79,15 @@ namespace Web_24BM.Services
 
             try
             {
-                // Obtén el curriculum del repositorio
                 Curriculum curriculum = await _Repository.GetById(IdCurriculum);
 
-                // Verifica si la foto existe
-                if (curriculum.NombreFoto != null)
+                if (!String.IsNullOrEmpty(curriculum.NombreFoto))
                 {
-                    // Obtén la ruta de la foto
                     string filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Archivos", curriculum.NombreFoto);
 
-                    // Elimina la foto
                     File.Delete(filePath);
                 }
 
-                // Elimina el curriculum del repositorio
                 if (await _Repository.Delete(IdCurriculum) > 0)
                 {
                     response.Success = true;
@@ -118,27 +137,43 @@ namespace Web_24BM.Services
 
             try
             {
+                string CURP = model.CURP;
+                string expresionRegularCURP = @"^[A-Z]{4}\d{6}[HM][A-Z]{5}[A-Z\d]\d$";
+
+                if (!Regex.IsMatch(CURP, expresionRegularCURP))
+                {
+
+                    return response;
+                }
+
+                int edad = DateTime.Now.Year - model.FechaNacimiento.Year;
+
+                if (DateTime.Now.DayOfYear < model.FechaNacimiento.DayOfYear)
+                {
+                    edad--;
+                }
+
+                if (edad < 18)
+                {
+                    return response;
+                }
+
                 string filePath = "";
                 string fileName = "";
-                // Verifica si el usuario está enviando una nueva foto
+
                 if (model.Foto != null && model.Foto.Length > 0)
                 {
-                    // Obtén el nombre del archivo de la foto
                     fileName = Path.GetFileName(model.Foto.FileName);
 
-                    // Obtén la ruta de la foto
                     filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/Archivos", fileName);
 
-                    // Elimina la foto existente
                     File.Delete(filePath);
 
-                    // Sobrescribe la foto existente con la nueva foto
                     using (var fileStream = new FileStream(filePath, FileMode.Create))
                     {
                         await model.Foto.CopyToAsync(fileStream);
                     }
 
-                    // Actualiza la foto en la base de datos
                     model.NombreFoto = fileName;
                     if (await _Repository.Update(model) > 0)
                     {
@@ -148,7 +183,6 @@ namespace Web_24BM.Services
                 }
                 else
                 {
-                    // Si no se envía una nueva foto, no hay nada que hacer
                     if (await _Repository.Update(model) > 0)
                     {
                         response.Success = true;

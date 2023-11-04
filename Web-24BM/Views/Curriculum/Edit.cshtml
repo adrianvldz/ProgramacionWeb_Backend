@@ -26,10 +26,16 @@
                             <span class="text-danger" asp-validation-for="Apellidos"></span>
                         </div>
                         <div class="mb-3">
+                            <label class="form-label">CURP</label>
+                            <input type="text" asp-for="CURP" class="form-control form-control-lg" />
+                            <span class="text-danger" asp-validation-for="CURP"></span>
+                        </div>
+                        <div class="mb-3">
                             <label class="form-label">Email</label>
                             <input type="email" asp-for="Email" class="form-control form-control-lg" />
                             <span class="text-danger" asp-validation-for="Email"></span>
                         </div>
+                       
                         <div class="mb-3">
                             <label class="form-label">Fecha de Nacimiento</label>
                             <input type="date" asp-for="FechaNacimiento" class="form-control form-control-lg" />

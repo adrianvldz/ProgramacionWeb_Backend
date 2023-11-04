@@ -24,6 +24,14 @@ namespace Web_24BM.Controllers
             return View(curriculum);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ImprimirCV(int idCurriculum)
+        {
+            var curriculum = await _curriculumService.GetById(idCurriculum);
+
+            return View(curriculum);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
