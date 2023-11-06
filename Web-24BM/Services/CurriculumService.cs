@@ -63,7 +63,7 @@ namespace Web_24BM.Services
                 if (result > 0)
                 {
                     response.Success = true;
-                    response.Message = $"Se agrego la evidencia '{model.Nombre}' correctamente";
+                    response.Message = $"Curriculum de '{model.Nombre}' agregado con éxito";
                 }
             }
             catch (Exception e)
@@ -91,7 +91,7 @@ namespace Web_24BM.Services
                 if (await _Repository.Delete(IdCurriculum) > 0)
                 {
                     response.Success = true;
-                    response.Message = "Se ha eliminado el registro con éxito.";
+                    response.Message = "Se ha eliminado el Curriculum con éxito.";
                 }
             }
             catch (Exception e)

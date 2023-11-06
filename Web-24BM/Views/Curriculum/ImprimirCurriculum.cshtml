@@ -1,0 +1,55 @@
+﻿@model Web_24BM.Models.Curriculum
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+<style>
+    body {
+        background-color: #f2f2f2;
+    }
+
+    .container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+        position: relative;
+    }
+
+    .btn-container {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-4">
+            <img src="~/Archivos/@Model.NombreFoto" width="160" height="160" class="img-fluid rounded-circle m-auto">
+        </div>
+        <div class="col-md-4">
+            <h1>@Model.Nombre @Model.Apellidos</h1>
+            <p><i class="fas fa-envelope"></i> Email: @Model.Email</p>
+            <p><i class="fas fa-calendar"></i> @Model.FechaNacimiento</p>
+            <p><i class="fas fa-file"></i> CURP: @Model.CURP</p>
+        </div>
+    </div>
+
+    <hr>
+    <h2><i class="fas fa-map-marker-alt"></i>  Ubicación</h2>
+    <p>Cancún, Quintana Roo</p>
+    <p>@Model.Direccion</p>
+    <hr>
+    <h2><i class="fas fa-briefcase"></i>  Experiencia Laboral</h2>
+    <p>@Model.DatosLaboral</p>
+    <p>2019 - 2022</p>
+
+    <hr>
+    <h2><i class="fas fa-bullseye"></i>  Objetivos</h2>
+    <h4>Objetivos personales y profesionales</h4>
+    <p>@Model.Objetivo</p>
+</div>
+
+

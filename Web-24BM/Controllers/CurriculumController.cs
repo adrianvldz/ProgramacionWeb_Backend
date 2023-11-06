@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 using Web_24BM.Models;
 using Web_24BM.Services;
 
@@ -29,8 +30,26 @@ namespace Web_24BM.Controllers
         {
             var curriculum = await _curriculumService.GetById(idCurriculum);
 
+
             return View(curriculum);
+
+           
         }
+        [HttpGet]
+        public async Task<IActionResult> ImprimirCurriculum(int idCurriculum)
+        {
+            var curriculum = await _curriculumService.GetById(idCurriculum);
+
+            return new ViewAsPdf("ImprimirCurriculum", curriculum)
+            {
+                FileName = $"curriculum de {curriculum.Nombre}.pdf",
+                PageOrientation = Rotativa.AspNetCore.Options.Orientation.Portrait,
+                PageSize = Rotativa.AspNetCore.Options.Size.A4
+
+
+            };
+        }
+
 
 
         [HttpGet]
